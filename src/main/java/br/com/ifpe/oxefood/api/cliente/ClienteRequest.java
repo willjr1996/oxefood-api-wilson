@@ -37,5 +37,4 @@ public class ClienteRequest {
                 .foneFixo(foneFixo)
                 .build();
     }
-
 }

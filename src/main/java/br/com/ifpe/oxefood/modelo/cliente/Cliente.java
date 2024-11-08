@@ -14,7 +14,7 @@ import lombok.Setter;
 
 
 @Entity
-@Table(name = "Cliente")
+@Table(name = "cliente")
 @SQLRestriction("habilitado = true")
 @Builder
 @Getter

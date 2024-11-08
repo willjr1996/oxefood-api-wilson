@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ClienteService {
-    @Autowired
+   @Autowired
    private ClienteRepository repository;
 
    @Transactional
@@ -16,5 +16,4 @@ public class ClienteService {
        cliente.setHabilitado(Boolean.TRUE);
        return repository.save(cliente);
    }
-
 }
