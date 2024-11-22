@@ -27,9 +27,9 @@ private String foneCelular;
 
 private String foneFixo;
 
-private int qtdEntregasRealizadas;
+private Integer qtdEntregasRealizadas;
 
-private double valorFrete;
+private Double valorFrete;
 
 private String enderecoRua;
 
@@ -45,7 +45,7 @@ private String enderecoCep;
 
 private String enderecoUf;
 
-private boolean ativo;
+private Boolean ativo;
 
 public Entregador build() {
 

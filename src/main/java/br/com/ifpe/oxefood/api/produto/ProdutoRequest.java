@@ -18,11 +18,11 @@ public class ProdutoRequest {
     
     private String descricao;
     
-    private double valorUnitario;
+    private Double valorUnitario;
     
-    private int tempoEntregaMinimo;
+    private Integer tempoEntregaMinimo;
     
-    private int tempoEntregaMaximo;
+    private Integer tempoEntregaMaximo;
 
     public Produto build(){
         
