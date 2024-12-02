@@ -1,5 +1,4 @@
 package br.com.ifpe.oxefood.modelo.cliente;
-
 import java.time.LocalDate;
 import org.hibernate.annotations.SQLRestriction;
 import br.com.ifpe.oxefood.util.entity.EntidadeAuditavel;
@@ -23,13 +22,13 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Cliente extends EntidadeAuditavel  {
     
-   @Column
+   @Column (nullable = false, length = 100)
    private String nome;
 
    @Column
    private LocalDate dataNascimento;
 
-   @Column
+   @Column (unique = true)
    private String cpf;
 
    @Column
