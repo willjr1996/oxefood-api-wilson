@@ -1,4 +1,5 @@
 package br.com.ifpe.oxefood.modelo.produto;
+
 import java.util.List;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +13,12 @@ public class ProdutoService {
 
     @Transactional
     public Produto save(Produto produto) {
-        if (produto.getValorUnitario() < 10) {
-	    throw new ProdutoException(ProdutoException.MSG_VALOR_MINIMO_PRODUTO);
-	}     
+            if (produto.getValorUnitario() < 20) {
+            throw new ProdutoException(ProdutoException.MSG_VALOR_MINIMO_PRODUTO);
+                } 
+            else if (produto.getValorUnitario() > 100) {
+            throw new ProdutoException(ProdutoException.MSG_VALOR_MAXIMO_PRODUTO);
+                }
         produto.setHabilitado(Boolean.TRUE);
         return repository.save(produto);
     }
@@ -41,9 +45,9 @@ public class ProdutoService {
     }
 
     @Transactional
-        public void delete(Long id) {
+    public void delete(Long id) {
         Produto produto = repository.findById(id).get();
         produto.setHabilitado(Boolean.FALSE);
         repository.save(produto);
-   }
+    }
 }

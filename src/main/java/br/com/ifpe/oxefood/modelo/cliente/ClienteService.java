@@ -4,6 +4,8 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.ifpe.oxefood.util.exception.ClienteException;
+
 @Service
 public class ClienteService {
     @Autowired
@@ -13,6 +15,10 @@ public class ClienteService {
     public Cliente save(Cliente cliente) {
         cliente.setHabilitado(Boolean.TRUE);
         return repository.save(cliente);
+
+        if(!cliente.getFoneCelular().startsWith("81") || !cliente.getFoneFixo().startsWith("81")){
+            throw new ClienteException(ClienteException.MSG_TELEFONE_INCORRETO);
+        }
     }
 
     public List<Cliente> listarTodos() {
