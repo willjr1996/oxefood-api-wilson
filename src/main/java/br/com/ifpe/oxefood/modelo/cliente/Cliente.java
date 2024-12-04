@@ -25,7 +25,7 @@ public class Cliente extends EntidadeAuditavel  {
    @Column (nullable = false, length = 100)
    private String nome;
 
-   @Column
+   @Column (nullable = false)
    private LocalDate dataNascimento;
 
    @Column (unique = true)

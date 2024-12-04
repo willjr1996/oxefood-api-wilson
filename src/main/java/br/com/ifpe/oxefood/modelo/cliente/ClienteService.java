@@ -14,11 +14,10 @@ public class ClienteService {
     @Transactional
     public Cliente save(Cliente cliente) {
         cliente.setHabilitado(Boolean.TRUE);
-        return repository.save(cliente);
-
-        if(!cliente.getFoneCelular().startsWith("81") || !cliente.getFoneFixo().startsWith("81")){
-            throw new ClienteException(ClienteException.MSG_TELEFONE_INCORRETO);
+        if (!cliente.getFoneCelular().startsWith("81") || !cliente.getFoneFixo().startsWith("81")){
+            throw new ClienteException(ClienteException.MSG_PREFIXO_CLIENTE);
         }
+        return repository.save(cliente);
     }
 
     public List<Cliente> listarTodos() {

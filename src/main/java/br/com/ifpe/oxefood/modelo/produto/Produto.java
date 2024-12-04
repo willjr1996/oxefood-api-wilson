@@ -19,16 +19,16 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Produto extends EntidadeAuditavel {
-    @Column
+    @Column (nullable = false)
     private String codigo;
     
-    @Column
+    @Column (nullable = false, length = 100)
     private String titulo;
 
-    @Column
+    @Column (nullable = false)
     private String descricao;
 
-    @Column
+    @Column (nullable = false)
     private Double valorUnitario;
 
     @Column
