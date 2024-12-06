@@ -14,6 +14,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ProdutoRequest {
     
+    private Long idCategoria;
+    
     @NotBlank(message = "O Código é de preenchimento obrigatório")
     private String codigo;
     

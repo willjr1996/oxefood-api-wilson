@@ -12,7 +12,7 @@ import lombok.Setter;
 
 
 @Entity
-@Table(name = "cattegoriaProduto")
+@Table(name = "categoriaProduto")
 @SQLRestriction("habilitado = true")
 @Builder
 @Getter
