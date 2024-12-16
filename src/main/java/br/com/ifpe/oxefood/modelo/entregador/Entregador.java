@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "Entregador")
+@Table(name = "entregador")
 @SQLRestriction("habilitado = true")
 @Builder
 @Getter

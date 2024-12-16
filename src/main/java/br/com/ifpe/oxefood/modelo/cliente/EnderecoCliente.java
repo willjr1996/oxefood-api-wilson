@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "EnderecoCliente")
+@Table(name = "enderecoCliente")
 @SQLRestriction("habilitado = true")
 @Builder
 @Getter
