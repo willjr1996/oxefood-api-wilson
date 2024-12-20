@@ -6,22 +6,40 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.ifpe.oxefood.modelo.acesso.Perfil;
+import br.com.ifpe.oxefood.modelo.acesso.PerfilRepository;
+import br.com.ifpe.oxefood.modelo.acesso.UsuarioService;
 import br.com.ifpe.oxefood.util.exception.ClienteException;
 
 @Service
 public class ClienteService {
+
     @Autowired
     private ClienteRepository repository;
 
     @Autowired
     private EnderecoClienteRepository enderecoClienteRepository;
 
+    @Autowired
+    private UsuarioService usuarioService;
+
+    @Autowired
+    private PerfilRepository perfilUsuarioRepository;
+
     @Transactional
     public Cliente save(Cliente cliente) {
-        cliente.setHabilitado(Boolean.TRUE);
+
+        usuarioService.save(cliente.getUsuario());
+
+        for (Perfil perfil : cliente.getUsuario().getRoles()) {
+            perfil.setHabilitado(Boolean.TRUE);
+            perfilUsuarioRepository.save(perfil);
+        }
+
         if (!cliente.getFoneCelular().startsWith("(81)") || !cliente.getFoneFixo().startsWith("(81)")) {
             throw new ClienteException(ClienteException.MSG_PREFIXO_CLIENTE);
         }
+        cliente.setHabilitado(Boolean.TRUE);
         return repository.save(cliente);
     }
 
@@ -62,13 +80,11 @@ public class ClienteService {
         Cliente cliente = this.obterPorID(clienteId);
 
         // Primeiro salva o EnderecoCliente:
-
         endereco.setCliente(cliente);
         endereco.setHabilitado(Boolean.TRUE);
         enderecoClienteRepository.save(endereco);
 
         // Depois acrescenta o endereço criado ao cliente e atualiza o cliente:
-
         List<EnderecoCliente> listaEnderecoCliente = cliente.getEnderecos();
 
         if (listaEnderecoCliente == null) {
