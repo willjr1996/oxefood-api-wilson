@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.ifpe.oxefood.modelo.acesso.Perfil;
 import br.com.ifpe.oxefood.modelo.acesso.PerfilRepository;
+import br.com.ifpe.oxefood.modelo.acesso.Usuario;
 import br.com.ifpe.oxefood.modelo.acesso.UsuarioService;
 import br.com.ifpe.oxefood.util.exception.ClienteException;
 
@@ -27,7 +28,7 @@ public class ClienteService {
     private PerfilRepository perfilUsuarioRepository;
 
     @Transactional
-    public Cliente save(Cliente cliente) {
+    public Cliente save(Cliente cliente, Usuario usuarioLogado) {
 
         usuarioService.save(cliente.getUsuario());
 
@@ -40,6 +41,7 @@ public class ClienteService {
             throw new ClienteException(ClienteException.MSG_PREFIXO_CLIENTE);
         }
         cliente.setHabilitado(Boolean.TRUE);
+        cliente.setCriadoPor(usuarioLogado);
         return repository.save(cliente);
     }
 
@@ -52,13 +54,15 @@ public class ClienteService {
     }
 
     @Transactional
-    public void update(Long id, Cliente clienteAlterado) {
+    public void update(Long id, Cliente clienteAlterado, Usuario usuarioLogado) {
         Cliente cliente = repository.findById(id).get();
         cliente.setNome(clienteAlterado.getNome());
         cliente.setDataNascimento(clienteAlterado.getDataNascimento());
         cliente.setCpf(clienteAlterado.getCpf());
         cliente.setFoneCelular(clienteAlterado.getFoneCelular());
         cliente.setFoneFixo(clienteAlterado.getFoneFixo());
+
+        cliente.setUltimaModificacaoPor(usuarioLogado);
 
         repository.save(cliente);
     }
