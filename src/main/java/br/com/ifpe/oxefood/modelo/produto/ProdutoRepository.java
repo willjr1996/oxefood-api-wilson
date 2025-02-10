@@ -11,7 +11,7 @@ public interface ProdutoRepository extends JpaRepository<Produto, Long> {
    List<Produto> consultarPorCodigo(String codigo);
 
    //Exemplo de uma busca aproximada com ordenação:
-   // @Query(value = "SELECT p FROM Produto p WHERE p.titulo like %:titulo% ORDER BY p.titulo")
+   // @Query(value = "SELECT p FROM Produto p WHERE p.titulo ilike %:titulo% ORDER BY p.titulo")
    // List<Produto> consultarPorTitulo(String titulo);
    List<Produto> findByTituloContainingIgnoreCaseOrderByTituloAsc(String titulo);
 
@@ -20,7 +20,7 @@ public interface ProdutoRepository extends JpaRepository<Produto, Long> {
    List<Produto> consultarPorCategoria(Long idCategoria);
 
    //Exemplo de uma busca com mais de um atributo
-   @Query(value = "SELECT p FROM Produto p WHERE p.titulo like %:titulo% AND p.categoria.id = :idCategoria")
+   @Query(value = "SELECT p FROM Produto p WHERE p.titulo ilike %:titulo% AND p.categoria.id = :idCategoria")
    List<Produto> consultarPorTituloECategoria(String titulo, Long idCategoria);
 
 }

@@ -47,7 +47,7 @@ public class ClienteService {
         cliente.setHabilitado(Boolean.TRUE);
         cliente.setCriadoPor(usuarioLogado);
         Cliente clienteSalvo = repository.save(cliente);
-        emailService.enviarEmailConfirmacaoCadastroCliente(clienteSalvo);
+        // emailService.enviarEmailConfirmacaoCadastroCliente(clienteSalvo);
         return clienteSalvo;
     }
 
@@ -135,4 +135,19 @@ public class ClienteService {
         repository.save(cliente);
     }
 
+    public List<Cliente> filtrar(String nome, String cpf) {
+
+        List<Cliente> listaClienteCpf = repository.findAll();
+        if ((nome != null && !"".equals(nome)) &&
+                (cpf == null || "".equals(cpf))) {
+            listaClienteCpf = repository.consultarPorNome(nome);
+        } else if ((nome == null || "".equals(nome)) &&
+                (cpf != null && !"".equals(cpf))) {
+            listaClienteCpf = repository.consultarPorCpf(cpf);
+        } else if ((nome != null && !"".equals(nome)) && 
+                    (cpf != null && !"".equals(cpf))){
+            listaClienteCpf = repository.findByCpfAndNome(nome, cpf);
+        }
+        return listaClienteCpf;
+    }
 }

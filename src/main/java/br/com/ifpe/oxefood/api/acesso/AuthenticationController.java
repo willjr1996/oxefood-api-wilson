@@ -1,9 +1,9 @@
 package br.com.ifpe.oxefood.api.acesso;
-
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,6 +17,11 @@ import br.com.ifpe.oxefood.modelo.seguranca.JwtService;
 @RestController
 @RequestMapping("/api/auth")
 @CrossOrigin
+@Tag(
+    name = "API Autenticação",
+    description = "API responsável pela autenticação de usuários no sistema"
+)
+
 public class AuthenticationController {
 
     private final JwtService jwtService;
@@ -29,6 +34,10 @@ public class AuthenticationController {
         this.usuarioService = usuarioService;
     }
 
+    @Operation(
+        summary = "Serviço responsável por logar um usuario no sistema.",
+        description = "api/auth"
+    )
     @PostMapping
     public Map<Object, Object> signin(@RequestBody AuthenticationRequest data) {
     
